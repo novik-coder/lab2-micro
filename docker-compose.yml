@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    build: ./discovery-service # 使用自定义 Dockerfile 构建 eureka-server 镜像
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - my-network
+
+  gateway:
+    build: ./gateway-service # 使用自定义 Dockerfile 构建 gateway 镜像
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+
+  reservation-service:
+    build: ./reservation-servcie
+    ports:
+      - "8070:8070"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+
+  library-service:
+    build: ./library-service
+    ports:
+      - "8060:8060"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+
+  rating-service:
+    build: ./rating-Service
+    ports:
+      - "8050:8050"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
