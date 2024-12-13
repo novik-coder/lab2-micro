@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # 复制构建好的 JAR 文件到容器中
-COPY target/rating-Service-1.0-SNAPSHOT.jar rating-Service-1.0-SNAPSHOT.jar
+COPY target/rating-service-1.0-SNAPSHOT.jar rating-service-1.0-SNAPSHOT.jar
 
 # 启动 Rating Service 应用
-ENTRYPOINT ["java", "-jar", "rating-Service-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "rating-service-1.0-SNAPSHOT.jar"]
 
 # 开放端口 8050
 EXPOSE 8050

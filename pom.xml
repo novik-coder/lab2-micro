@@ -26,7 +26,7 @@
         <module>gateway-service</module>
         <module>reservation-service</module>
         <module>library-service</module>
-        <module>rating-Service</module>
+        <module>rating-service</module>
         <module>common-servcie</module>
     </modules>
 
