@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'  # 启用 Maven 缓存
+          cache: 'maven'
 
       - name: Build all services
         run: mvn clean package -DskipTests
@@ -32,36 +32,57 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker images
-        env:
-          DOCKER_BUILDKIT: 1
-        strategy:
-          matrix:
-            include:
-              - service: eureka-server
-                context: ./discovery-service
-              - service: gateway
-                context: ./gateway-service
-              - service: reservation-service
-                context: ./reservation-service
-              - service: library-service
-                context: ./library-service
-              - service: rating-service
-                context: ./rating-service
-        steps:
-          - name: Build and push ${{ matrix.service }}
-            uses: docker/build-push-action@v3
-            with:
-              context: ${{ matrix.context }}
-              push: true
-              tags: |
-                hupengwei123/cicd:${{ matrix.service }}
-                hupengwei123/cicd:${{ matrix.service }}-${{ github.sha }}
-              cache-from: type=local,src=/tmp/.buildx-cache
-              cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+      # 分别构建和推送每个服务的镜像
+      - name: Build and push eureka-server
+        uses: docker/build-push-action@v3
+        with:
+          context: ./discovery-service
+          push: true
+          tags: |
+            hupengwei123/cicd:eureka-server
+            hupengwei123/cicd:eureka-server-${{ github.sha }}
 
-      # 更新缓存
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      - name: Build and push gateway
+        uses: docker/build-push-action@v3
+        with:
+          context: ./gateway-service
+          push: true
+          tags: |
+            hupengwei123/cicd:gateway
+            hupengwei123/cicd:gateway-${{ github.sha }}
+
+      - name: Build and push reservation-service
+        uses: docker/build-push-action@v3
+        with:
+          context: ./reservation-service
+          push: true
+          tags: |
+            hupengwei123/cicd:reservation-service
+            hupengwei123/cicd:reservation-service-${{ github.sha }}
+
+      - name: Build and push library-service
+        uses: docker/build-push-action@v3
+        with:
+          context: ./library-service
+          push: true
+          tags: |
+            hupengwei123/cicd:library-service
+            hupengwei123/cicd:library-service-${{ github.sha }}
+
+      - name: Build and push rating-service
+        uses: docker/build-push-action@v3
+        with:
+          context: ./rating-service
+          push: true
+          tags: |
+            hupengwei123/cicd:rating-service
+            hupengwei123/cicd:rating-service-${{ github.sha }}
+
+      # 缓存处理
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
