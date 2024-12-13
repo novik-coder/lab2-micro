@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/**
+        - id: reservation-service
+          uri: lb://RESERVATION-SERVICE
+          predicates:
+            - Path=/api/v1/reservations/**
+        - id: library-service
+          uri: lb://LIBRARY-SERVICE
+          predicates:
+            - Path=/api/v1/libraries/**
+        - id: rating-service
+          uri: lb://RATING-SERVICE
+          predicates:
+            - Path=/api/v1/rating/**
