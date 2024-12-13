@@ -20,6 +20,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: https://cicd-eureka-server.onrender.com/eureka/
+  instance:
+    hostname: https://cicd-reservation-service.onrender.com
 management:
   endpoints:
     web:
