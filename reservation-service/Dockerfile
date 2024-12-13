@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # 复制构建好的 JAR 文件到容器中
-COPY target/reservation-servcie-1.0-SNAPSHOT.jar reservation-servcie-1.0-SNAPSHOT.jar
+COPY target/reservation-service-1.0-SNAPSHOT.jar reservation-service-1.0-SNAPSHOT.jar
 
 # 启动 Reservation Service 应用
-ENTRYPOINT ["java", "-jar", "reservation-servcie-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "reservation-service-1.0-SNAPSHOT.jar"]
 
 # 开放端口 8070
 EXPOSE 8070
