@@ -40,7 +40,6 @@ jobs:
           push: true
           tags: |
             hupengwei123/cicd:eureka-server
-            hupengwei123/cicd:eureka-server-${{ github.sha }}
 
       - name: Build and push gateway
         uses: docker/build-push-action@v3
@@ -49,7 +48,6 @@ jobs:
           push: true
           tags: |
             hupengwei123/cicd:gateway
-            hupengwei123/cicd:gateway-${{ github.sha }}
 
       - name: Build and push reservation-service
         uses: docker/build-push-action@v3
@@ -58,7 +56,6 @@ jobs:
           push: true
           tags: |
             hupengwei123/cicd:reservation-service
-            hupengwei123/cicd:reservation-service-${{ github.sha }}
 
       - name: Build and push library-service
         uses: docker/build-push-action@v3
@@ -67,7 +64,6 @@ jobs:
           push: true
           tags: |
             hupengwei123/cicd:library-service
-            hupengwei123/cicd:library-service-${{ github.sha }}
 
       - name: Build and push rating-service
         uses: docker/build-push-action@v3
@@ -76,7 +72,6 @@ jobs:
           push: true
           tags: |
             hupengwei123/cicd:rating-service
-            hupengwei123/cicd:rating-service-${{ github.sha }}
 
       # 缓存处理
       - name: Cache Docker layers

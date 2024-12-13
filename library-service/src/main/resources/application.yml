@@ -35,6 +35,9 @@ eureka:
       defaultZone: https://cicd-eureka-server.onrender.com/eureka/
   instance:
     hostname: cicd-library-service.onrender.com
+    non-secure-port: 8060
+    metadataMap:
+      external-url: "https://cicd-library-service.onrender.com"
 management:
   endpoints:
     web:
