@@ -21,7 +21,7 @@ eureka:
     serviceUrl:
       defaultZone: https://cicd-eureka-server.onrender.com/eureka/
   instance:
-    hostname: https://cicd-rating-service.onrender.com
+    hostname: cicd-rating-service.onrender.com
 management:
   endpoints:
     web:

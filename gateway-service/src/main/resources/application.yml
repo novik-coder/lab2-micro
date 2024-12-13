@@ -23,4 +23,4 @@ eureka:
     serviceUrl:
       defaultZone: https://cicd-eureka-server.onrender.com/eureka/
   instance:
-    hostname: https://cicd-gateway.onrender.com
+    hostname: cicd-gateway.onrender.com

@@ -34,7 +34,7 @@ eureka:
     serviceUrl:
       defaultZone: https://cicd-eureka-server.onrender.com/eureka/
   instance:
-    hostname: https://cicd-library-service.onrender.com
+    hostname: cicd-library-service.onrender.com
 management:
   endpoints:
     web:
