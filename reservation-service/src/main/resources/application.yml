@@ -19,7 +19,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://cicd-eureka-server.onrender.com/eureka/
 management:
   endpoints:
     web:

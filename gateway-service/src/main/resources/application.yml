@@ -18,3 +18,7 @@ spring:
           uri: lb://RATING-SERVICE
           predicates:
             - Path=/api/v1/rating/**
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://cicd-eureka-server.onrender.com/eureka/
