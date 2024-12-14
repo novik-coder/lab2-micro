@@ -19,12 +19,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: https://cicd-eureka-server.onrender.com/eureka/
-  instance:
-    hostname: cicd-reservation-service.onrender.com
-    non-secure-port: 8070
-    metadataMap:
-      external-url: "https://cicd-reservation-service.onrender.com"
+      defaultZone: http://127.0.0.1：8761/eureka/
 management:
   endpoints:
     web:

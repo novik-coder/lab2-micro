@@ -1,59 +1,55 @@
-version: '3.8'
+version: '3.3'
 
 services:
   eureka-server:
-    build: ./discovery-service # 使用自定义 Dockerfile 构建 eureka-server 镜像
+    image: hupengwei123/cicd:eureka-server
+    container_name: eureka-server
     ports:
-      - "8761:8761"
+      - "8761:8761"  # 将本地端口 8761 映射到容器的 8761 端口
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - my-network
+      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+    restart: always
 
   gateway:
-    build: ./gateway-service # 使用自定义 Dockerfile 构建 gateway 镜像
+    image: hupengwei123/cicd:gateway
+    container_name: gateway
     ports:
-      - "8080:8080"
+      - "8080:8080"  # 将本地端口 8080 映射到容器的 8080 端口
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
     depends_on:
-      - eureka-server
-    networks:
-      - my-network
+      - eureka-server  # 确保 eureka-server 在 gateway 启动之前启动
+    restart: always
 
   reservation-service:
-    build: ./reservation-servcie
+    image: hupengwei123/cicd:reservation-service
+    container_name: reservation-service
     ports:
-      - "8070:8070"
+      - "8090:8090"  # 将本地端口 8090 映射到容器的 8090 端口
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
     depends_on:
       - eureka-server
-    networks:
-      - my-network
+    restart: always
 
   library-service:
-    build: ./library-service
+    image: hupengwei123/cicd:library-service
+    container_name: library-service
     ports:
-      - "8060:8060"
+      - "8100:8100"  # 将本地端口 8100 映射到容器的 8100 端口
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
     depends_on:
       - eureka-server
-    networks:
-      - my-network
+    restart: always
 
   rating-service:
-    build: ./rating-Service
+    image: hupengwei123/cicd:rating-service
+    container_name: rating-service
     ports:
-      - "8050:8050"
+      - "8110:8110"  # 将本地端口 8110 映射到容器的 8110 端口
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
     depends_on:
       - eureka-server
-    networks:
-      - my-network
-
-networks:
-  my-network:
-    driver: bridge
+    restart: always

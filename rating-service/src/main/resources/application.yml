@@ -19,12 +19,8 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: https://cicd-eureka-server.onrender.com/eureka/
-  instance:
-    hostname: cicd-rating-service.onrender.com
-    non-secure-port: 8050
-    metadataMap:
-      external-url: "https://cicd-rating-service.onrender.com"  # 注册时使用外部 URL
+      defaultZone: http://127.0.0.1:8761/eureka/
+
 management:
   endpoints:
     web:

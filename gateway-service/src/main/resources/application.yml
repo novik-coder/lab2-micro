@@ -23,11 +23,6 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: https://cicd-eureka-server.onrender.com/eureka/
-  instance:
-    hostname: cicd-gateway.onrender.com
-    non-secure-port: 8080
-    metadataMap:
-      external-url: "https://cicd-gateway.onrender.com"
+      defaultZone: http://127.0.0.1:8761/eureka/
 server:
   port: 8080

@@ -83,48 +83,48 @@ jobs:
 
 
 
-      - name: Deploy to eureka
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-            service-id: srv-cte4dqdumphs739brmug # Render服务ID
-            api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
-      - name: Wait for service to be ready
-        run: |
-          echo "Waiting for service to start..."
-          sleep 120 # 根据实际启动时间调整
-      - name: Deploy to library
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: srv-cte4gtlumphs739bt750 # Render服务ID
-          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
-      - name: Deploy to reservation
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: srv-cte4t3rgbbvc73epmqp0 # Render服务ID
-          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
-      - name: Deploy to rating
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: srv-cte4tbtumphs739c32j0 # Render服务ID
-          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
-      - name: Wait for service to be ready
-        run: |
-          echo "Waiting for service to start..."
-          sleep 360 # 根据实际启动时间调整
-      - name: Deploy to gateway
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: srv-cte4lolds78s739io870 # Render服务ID
-          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
-      - name: Wait for service to be ready
-        run: |
-          echo "Waiting for service to start..."
-          sleep 360 # 根据实际启动时间调整
-      # 运行 Postman API 测试
-      - name: Run Postman API Tests
-        uses: matt-ball/newman-action@master
-        with:
-          collection: ./postman/collection.json
-          environment: ./postman/environment.json
-          delayRequest: 108
-          reporters: '[ "cli" ]'
+#      - name: Deploy to eureka
+#        uses: johnbeynon/render-deploy-action@v0.0.8
+#        with:
+#            service-id: srv-cte4dqdumphs739brmug # Render服务ID
+#            api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
+#      - name: Wait for service to be ready
+#        run: |
+#          echo "Waiting for service to start..."
+#          sleep 120 # 根据实际启动时间调整
+#      - name: Deploy to library
+#        uses: johnbeynon/render-deploy-action@v0.0.8
+#        with:
+#          service-id: srv-cte4gtlumphs739bt750 # Render服务ID
+#          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
+#      - name: Deploy to reservation
+#        uses: johnbeynon/render-deploy-action@v0.0.8
+#        with:
+#          service-id: srv-cte4t3rgbbvc73epmqp0 # Render服务ID
+#          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
+#      - name: Deploy to rating
+#        uses: johnbeynon/render-deploy-action@v0.0.8
+#        with:
+#          service-id: srv-cte4tbtumphs739c32j0 # Render服务ID
+#          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
+#      - name: Wait for service to be ready
+#        run: |
+#          echo "Waiting for service to start..."
+#          sleep 360 # 根据实际启动时间调整
+#      - name: Deploy to gateway
+#        uses: johnbeynon/render-deploy-action@v0.0.8
+#        with:
+#          service-id: srv-cte4lolds78s739io870 # Render服务ID
+#          api-key: ${{ secrets.RENDER_API_KEY }} # Render API 密钥
+#      - name: Wait for service to be ready
+#        run: |
+#          echo "Waiting for service to start..."
+#          sleep 360 # 根据实际启动时间调整
+#      # 运行 Postman API 测试
+#      - name: Run Postman API Tests
+#        uses: matt-ball/newman-action@master
+#        with:
+#          collection: ./postman/collection.json
+#          environment: ./postman/environment.json
+#          delayRequest: 108
+#          reporters: '[ "cli" ]'
