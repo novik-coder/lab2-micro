@@ -30,3 +30,12 @@ eureka:
 
 server:
   port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /manage
+  endpoint:
+    health:
+      show-details: always
