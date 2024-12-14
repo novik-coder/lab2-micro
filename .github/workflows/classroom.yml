@@ -37,6 +37,9 @@ jobs:
       - name: Build images
         timeout-minutes: 10
         run: docker compose build
+      # 添加权限设置
+      - name: Make wait script executable
+        run: chmod +x ./scripts/wait-script.sh
 
       - name: Run containers
         timeout-minutes: 5
