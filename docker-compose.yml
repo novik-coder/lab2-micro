@@ -25,7 +25,7 @@ services:
 
   eureka-server:
     build:
-      context: ./eureka-server
+      context: ./discovery-service
       dockerfile: Dockerfile
     container_name: eureka-server
     ports:
@@ -38,7 +38,7 @@ services:
 
   gateway:
     build:
-      context: ./gateway
+      context: ./gateway-service
       dockerfile: Dockerfile
     container_name: gateway
     ports:
