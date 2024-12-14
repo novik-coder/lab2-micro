@@ -52,6 +52,17 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050
+      - name: Check Database Status
+        run: |
+          # 列出所有数据库
+          PGPASSWORD=postgres docker compose exec -T postgres psql -U postgres -c "\l"
+          
+          # 列出所有用户
+          PGPASSWORD=postgres docker compose exec -T postgres psql -U postgres -c "\du"
+          
+          # 切换到 libraries 数据库并列出所有表
+          PGPASSWORD=postgres docker compose exec -T postgres psql -U postgres -d libraries -c "\dt"
+
       - name: Verify Database Data
         run: |
              # 连接到 libraries 数据库并查询数据
