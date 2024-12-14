@@ -2,7 +2,7 @@ spring:
   application:
     name: rating-service
   datasource:
-    url: jdbc:postgresql://156.241.128.83:5432/ratings
+    url: jdbc:postgresql://postgres:5432/ratings
     username: program
     password: test
     driver-class-name: org.postgresql.Driver
