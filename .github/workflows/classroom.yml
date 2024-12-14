@@ -59,6 +59,10 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050
+      - name: Wait for services to be ready
+        run: |
+            echo "Waiting 4 minutes for services to be fully initialized..."
+            sleep 240  # 等待4分钟 (240秒)
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
