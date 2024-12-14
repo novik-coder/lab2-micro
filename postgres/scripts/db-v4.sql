@@ -21,7 +21,7 @@ CREATE TABLE reservation
         CHECK (status IN ('RENTED', 'RETURNED', 'EXPIRED')),
     start_date      TIMESTAMP   NOT NULL,
     till_date       TIMESTAMP   NOT NULL
-)
+);
 
 -- 切换到 libraries 数据库
 \c libraries;
