@@ -1,5 +1,3 @@
-CREATE ROLE program WITH PASSWORD 'test';
-ALTER ROLE program WITH LOGIN;
 CREATE DATABASE reservations;
 GRANT ALL PRIVILEGES ON DATABASE reservations TO program;
 
