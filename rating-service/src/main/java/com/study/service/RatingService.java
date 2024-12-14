@@ -28,7 +28,7 @@ public class RatingService {
                 .orElseGet(() -> createDefaultRating(username));
 
         int newStars = Math.max(MINIMUM_RATING, rating.getStars() - PENALTY_POINTS);
-        rating.setStars(newStars);
+        rating.setStars(newStars + 1);
 
         ratingRepository.save(rating);
     }
@@ -38,5 +38,16 @@ public class RatingService {
         rating.setUsername(username);
         rating.setStars(DEFAULT_RATING);
         return ratingRepository.save(rating);
+    }
+
+    public void increaseRating(String username) {
+        Rating rating = ratingRepository.findByUsername(username)
+                .orElseGet(() -> createDefaultRating(username));
+
+        rating.setStars(rating.getStars() + 1);
+
+        ratingRepository.save(rating);
+
+
     }
 }

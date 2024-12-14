@@ -80,8 +80,8 @@ public class LibraryService {
         return new LibraryResponse(
                 library.getLibraryUid(),
                 library.getName(),
-                library.getCity(),
-                library.getAddress()
+                library.getAddress(),
+                library.getCity()
         );
     }
 

@@ -84,6 +84,7 @@ public class ReservationService {
                 reservation.getLibraryUid(),
                 reservation.getBookUid()
         );
+        ratingServiceClient.increaseRating(username);
     }
 
     private BookReservationResponse toBookReservationResponse(Reservation reservation) {

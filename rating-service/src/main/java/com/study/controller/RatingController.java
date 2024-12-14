@@ -27,4 +27,12 @@ public class RatingController {
         ratingService.decreaseRating(username);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/increase")
+    public ResponseEntity<Void> increaseRating(
+            @RequestHeader("X-User-Name") String username
+    ) {
+        ratingService.increaseRating(username);
+        return ResponseEntity.ok().build();
+    }
 }
