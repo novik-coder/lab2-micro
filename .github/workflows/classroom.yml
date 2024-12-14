@@ -48,21 +48,33 @@ jobs:
         run: |
           docker compose up -d
           sleep 30
-          
-          echo "Checking container status..."
-          docker compose ps
-          
-          echo "Checking container logs..."
-          docker compose logs
-          
           echo "Starting wait script..."
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050
+      - name: Verify Database Data
+        run: |
+              # 连接到 libraries 数据库并查询数据
+              docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library;"
+              docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM books;"
+              docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library_books;"
+              
+              # 连接到 reservations 数据库验证
+              docker compose exec -T postgres psql -U program -d reservations -c "SELECT * FROM reservation;"
+              
+              # 连接到 ratings 数据库验证
+              docker compose exec -T postgres psql -U program -d ratings -c "SELECT * FROM rating;"
+      - name: Check Services Status
+        run: |
+            echo "Checking Docker containers status..."
+            docker compose ps
+            
+            echo "Checking Eureka status..."
+            curl -v http://localhost:8761/eureka/apps
       - name: Wait for services to be ready
         run: |
-            echo "Waiting 4 minutes for services to be fully initialized..."
-            sleep 240  # 等待4分钟 (240秒)
+            echo "Waiting 3 minutes for services to be fully initialized..."
+            sleep 180  # 等待4分钟 (180秒)
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
