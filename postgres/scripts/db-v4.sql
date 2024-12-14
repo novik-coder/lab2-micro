@@ -8,6 +8,7 @@ CREATE DATABASE ratings;
 GRANT ALL PRIVILEGES ON DATABASE ratings TO program;
 -- 切换到 reservations 数据库
 \c reservations;
+ALTER SCHEMA public OWNER TO program;
 
 -- 创建 reservations 表
 CREATE TABLE reservation
@@ -22,9 +23,11 @@ CREATE TABLE reservation
     start_date      TIMESTAMP   NOT NULL,
     till_date       TIMESTAMP   NOT NULL
 );
+ALTER TABLE reservation OWNER TO program;
 
 -- 切换到 libraries 数据库
 \c libraries;
+ALTER SCHEMA public OWNER TO program;
 
 CREATE TABLE library
 (
@@ -34,6 +37,7 @@ CREATE TABLE library
     city        VARCHAR(255) NOT NULL,
     address     VARCHAR(255) NOT NULL
 );
+ALTER TABLE library OWNER TO program;
 
 CREATE TABLE books
 (
@@ -45,6 +49,7 @@ CREATE TABLE books
     condition VARCHAR(20) DEFAULT 'EXCELLENT'
         CHECK (condition IN ('EXCELLENT', 'GOOD', 'BAD'))
 );
+ALTER TABLE books OWNER TO program;
 
 CREATE TABLE library_books
 (
@@ -52,6 +57,7 @@ CREATE TABLE library_books
     library_id      INT REFERENCES library (id),
     available_count INT NOT NULL
 );
+ALTER TABLE library_books OWNER TO program;
 
 INSERT INTO "public"."library" VALUES (1, '83575e12-7ce0-48ee-9931-51919ff3c9ee', 'Библиотека имени 7 Непьющих', 'Москва', '2-я Бауманская ул., д.5, стр.1');
 INSERT INTO "public"."library" VALUES (2, '57e29e72-2f53-4a90-8880-9518b7122b50', 'Центральная библиотека', 'Москва', 'Красная площадь, д.10');
@@ -79,6 +85,7 @@ INSERT INTO "public"."library_books" VALUES (2, 5, 6);
 INSERT INTO "public"."library_books" VALUES (3, 1, 3);
 -- 切换到 ratings 数据库
 \c ratings;
+ALTER SCHEMA public OWNER TO program;
 
 -- 创建 ratings 表
 CREATE TABLE rating
@@ -88,3 +95,4 @@ CREATE TABLE rating
     stars    INT         NOT NULL
         CHECK (stars BETWEEN 0 AND 100)
 );
+ALTER TABLE rating OWNER TO program;
