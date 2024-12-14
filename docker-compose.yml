@@ -5,51 +5,70 @@ services:
     image: hupengwei123/cicd:eureka-server
     container_name: eureka-server
     ports:
-      - "8761:8761"  # 将本地端口 8761 映射到容器的 8761 端口
+      - "8761:8761"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - microservice-network
     restart: always
 
   gateway:
     image: hupengwei123/cicd:gateway
     container_name: gateway
     ports:
-      - "8080:8080"  # 将本地端口 8080 映射到容器的 8080 端口
+      - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
-      - eureka-server  # 确保 eureka-server 在 gateway 启动之前启动
+      - eureka-server
+    networks:
+      - microservice-network
     restart: always
 
   reservation-service:
     image: hupengwei123/cicd:reservation-service
     container_name: reservation-service
     ports:
-      - "8070:8070"  # 将本地端口 8090 映射到容器的 8090 端口
+      - "8070:8070"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
+    networks:
+      - microservice-network
     restart: always
 
   library-service:
     image: hupengwei123/cicd:library-service
     container_name: library-service
     ports:
-      - "8060:8060"  # 将本地端口 8100 映射到容器的 8100 端口
+      - "8060:8060"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
+    networks:
+      - microservice-network
     restart: always
 
   rating-service:
     image: hupengwei123/cicd:rating-service
     container_name: rating-service
     ports:
-      - "8050:8050"  # 将本地端口 8110 映射到容器的 8110 端口
+      - "8050:8050"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # 配置环境变量（可选）
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
+    networks:
+      - microservice-network
     restart: always
+
+# 定义网络
+networks:
+  microservice-network:
+    driver: bridge
