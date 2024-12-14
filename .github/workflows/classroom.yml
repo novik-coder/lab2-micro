@@ -54,11 +54,10 @@ jobs:
           WAIT_PORTS: 8080,8070,8060,8050
       - name: Verify Database Data
         run: |
-              # 连接到 libraries 数据库并查询数据
-            PGPASSWORD=test docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library;"
-          
-            PGPASSWORD=test docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM books;"
-            PGPASSWORD=test  docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library_books;"
+             # 连接到 libraries 数据库并查询数据
+             PGPASSWORD=test docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library;"
+             PGPASSWORD=test docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM books;"
+             PGPASSWORD=test  docker compose exec -T postgres psql -U program -d libraries -c "SELECT * FROM library_books;"
       - name: Check Services Status
         run: |
             echo "Checking Docker containers status..."
